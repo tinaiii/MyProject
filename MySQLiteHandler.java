@@ -1,27 +1,21 @@
 package com.example.myfirst;
 
-import android.R.string;
-import android.app.DownloadManager.Query;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.Editable;
-import android.util.Log;
 
 public class MySQLiteHandler extends SQLiteOpenHelper {
 	private SQLiteDatabase db;
 	private boolean result;
 	// Books table name
-	private static final String TABLE_USERS = "Users";
+	private static String TABLE_USERS = "Users";
 
 	// Books Table Columns names
-	private static final String KEY_ID = "id";
-	private static final String KEY_USERNAME = "username";
-	private static final String KEY_PASSWORD = "password";
+	private static final String KEY_ID = "id" ;
+	private static final String KEY_USERNAME="username";
+	private static final String KEY_PASSWORD ="password" ;
 
 	private static final String[] COLUMNS = { KEY_ID, KEY_USERNAME,
 			KEY_PASSWORD };
@@ -58,18 +52,18 @@ public class MySQLiteHandler extends SQLiteOpenHelper {
 
 	}
 
-	public boolean Login(String username, String password) {
-		String count = "SELECT * FROM " + TABLE_USERS + " WHERE KEY_USERNAME="
-				+ username + "KEY_USERNAME=" + password + ";";
-		Cursor mCursor = db
-				.rawQuery(count, null);
+	public boolean Login(String Username, String Password) {
+		SQLiteDatabase db = this.getReadableDatabase();
 
-		if (mCursor != null) {
-			return true;
+		String count = "SELECT * FROM  Users  WHERE username=? and password= ? ";
+		
+			Cursor mCursor = db.rawQuery(count, new String[]{Username , Password});
 
-		} else
-			return false;
+			if (mCursor != null) {
+				return true;
 
+			} else
+				return false;
 	}
 
 	// Adding new contact
