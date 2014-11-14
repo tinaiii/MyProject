@@ -1,7 +1,5 @@
 package com.example.myfirst;
 
-import com.example.myfirst.R.string;
-
 public class Users {
 	private int id;
 	private String username;
